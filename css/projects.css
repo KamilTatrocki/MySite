@@ -1,0 +1,129 @@
+/* Projects */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Project Card */
+.project-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    height: 100%;
+    color: var(--light-text);
+    z-index: 1;
+}
+
+/* Gradient Border Effect via Pseudo-element */
+.project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--school-bus-yellow), transparent 40%, transparent 60%, var(--gold));
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+}
+
+.project-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.card-header {
+    margin-bottom: 1rem;
+}
+
+.project-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--school-bus-yellow);
+    margin-bottom: 0.75rem;
+    display: inline-block;
+    position: relative;
+}
+
+/* Decorative underline for Project Title */
+.project-title::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--gold);
+    transition: width 0.3s ease;
+}
+
+.project-card:hover .project-title::after {
+    width: 100%;
+}
+
+.project-description {
+    color: var(--light-text);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.btn-github {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--dark-text);
+    color: var(--light-text);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    border: 1px solid transparent;
+}
+
+.btn-github:hover {
+    background-color: var(--imperial-blue);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: var(--school-bus-yellow);
+}
+
+.btn-github svg {
+    transition: transform 0.3s ease;
+}
+
+.btn-github:hover svg {
+    transform: rotate(360deg);
+}
+
+@media (min-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}

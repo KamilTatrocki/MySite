@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
 /* CSS Variables */
 :root {
     --imperial-blue: #00296bff;
@@ -19,6 +21,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 html {
@@ -89,9 +92,7 @@ section {
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    cursor: pointer;
     transition: all var(--transition-speed) ease;
-    text-align: center;
     text-align: center;
 }
 
@@ -140,7 +141,6 @@ nav {
 
 .nav-links {
     display: none;
-    /* Mobile first hidden */
 }
 
 /* Mobile Menu Toggle */
@@ -163,14 +163,12 @@ nav {
     flex-direction: column;
     align-items: center;
     max-height: 0;
-    /* Hidden by default */
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
 }
 
 .mobile-nav.active {
     max-height: 400px;
-    /* Expand when active */
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -183,21 +181,20 @@ nav {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Hero Section (Updated Animation Style) */
+/* Hero Section */
 .hero {
     max-width: 100%;
     background-color: var(--imperial-blue);
     color: var(--light-text);
-    padding: 6rem 1.5rem 4rem;
+    padding: 4rem 1.5rem;
     text-align: center;
-    min-height: 80vh;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-image: linear-gradient(135deg, var(--imperial-blue) 0%, var(--french-blue) 100%);
     overflow: hidden;
-    /* Ensure animations don't overflow */
 }
 
 .hero-content-box {
@@ -213,12 +210,6 @@ nav {
     display: flex;
     align-items: center;
     height: 60px;
-    /* Increased slightly for larger font */
-}
-
-.anim-block-main,
-.src-block {
-    /* Alias for block */
 }
 
 .anim-block-primary {
@@ -234,7 +225,6 @@ nav {
     font-family: var(--font-main);
     color: var(--light-text);
     font-size: 3rem;
-    /* Adjusted for h1 */
     animation: mainFadeIn 2s forwards;
     animation-delay: 1.6s;
     opacity: 0;
@@ -242,7 +232,6 @@ nav {
     align-items: baseline;
     position: relative;
     margin: 0;
-    /* consistent placement */
 }
 
 .hero-title-anim h1 .dot {
@@ -272,7 +261,6 @@ nav {
     width: 0%;
     height: inherit;
     background: var(--gold);
-    /* Using Gold as secondary accent */
     position: absolute;
     animation: secBlock 2s cubic-bezier(.74, .06, .4, .92) forwards;
     animation-delay: 2s;
@@ -285,7 +273,6 @@ nav {
     opacity: 0;
     font-weight: 400;
     font-family: var(--font-code);
-    /* Using project code font as 'Lato' equivalent */
     color: var(--light-text);
     font-size: 1rem;
     text-transform: uppercase;
@@ -293,11 +280,58 @@ nav {
     margin: 0;
 }
 
+.hero-cta-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 12em;
+    /* Reserve space for the text to prevent layout jumps */
+    margin: 3rem auto 0;
+}
+
 .hero-cta {
-    margin-top: 3rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: inline-block;
+    color: #f1f1f1;
+    font-size: clamp(0.9rem, 4vw, 1.5rem);
+    overflow: hidden;
+
+    /* Removed max-width here as it constrains the typing effect improperly if wrapper handles width logic, 
+       but keeping it doesn't hurt if consistent. */
+    max-width: 100%;
+    width: 100%;
+    /* Ensure it spans the wrapper width for centering */
+    text-align: center;
+    /* Center text if lines don't fill width */
+
+    animation:
+        secFadeIn 2s forwards;
+}
+
+.hero-cta::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: rgba(255, 255, 255, .75);
     opacity: 0;
-    animation: secFadeIn 2s forwards;
-    animation-delay: 3.5s;
+    /* animation: blinkingCursor 1s steps(2) 3s infinite normal; */
+    vertical-align: -0.2em;
+    margin-left: 2px;
+}
+
+@keyframes blinkingCursor {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
 
 /* Animations Keyframes */
@@ -353,8 +387,6 @@ nav {
     100% {
         opacity: 1;
     }
-
-    /* opacity 0.5 in original, changed to 1 for readability */
 }
 
 @keyframes popIn {
@@ -394,270 +426,27 @@ nav {
     }
 }
 
-/* Known Technologies */
-.tech-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.tech-badge {
-    background-color: var(--imperial-blue);
-    color: var(--light-text);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    font-weight: 500;
-    border: 1px solid var(--french-blue);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all var(--transition-speed) ease;
+/* Scroll Reveal Animation */
+.reveal {
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
 }
 
-.tech-badge:hover {
-    color: var(--school-bus-yellow);
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
-}
-
-/* Education & Experience & Certificates - Shared Timeline/Card Style */
-.timeline-container {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.card-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-}
-
-/* Info Card - Glassmorphism & Gradient Border */
-.info-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.03);
-    /* Very subtle transparency */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.4s ease;
-    overflow: hidden;
-    z-index: 1;
-}
-
-/* Gradient Border Effect via Pseudo-element */
-.info-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    padding: 2px;
-    /* Border thickness */
-    background: linear-gradient(135deg, var(--school-bus-yellow), transparent 40%, transparent 60%, var(--gold));
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0.5;
-    transition: opacity 0.4s ease;
-}
-
-.info-card:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    background: rgba(255, 255, 255, 0.06);
-}
-
-.info-card:hover::before {
+.reveal.active {
     opacity: 1;
-}
-
-.info-card h3 {
-    color: var(--school-bus-yellow);
-    margin-bottom: 0.5rem;
-    font-size: 1.4rem;
-    position: relative;
-    display: inline-block;
-}
-
-/* Decorative underline for H3 */
-.info-card h3::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: var(--gold);
-    transition: width 0.3s ease;
-}
-
-.info-card:hover h3::after {
-    width: 100%;
-}
-
-.info-card .meta {
-    font-family: var(--font-code);
-    color: var(--light-blue);
-    /* High contrast accent */
-    font-size: 0.9rem;
-    margin-bottom: 1.2rem;
-    display: block;
-    letter-spacing: 0.5px;
-    opacity: 0.9;
-}
-
-.info-card p {
-    color: var(--light-text);
-    line-height: 1.7;
-    opacity: 0.85;
-}
-
-/* Projects */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-}
-
-/* Project Card - Info Card Style Match */
-.project-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: column;
-    transition: all 0.4s ease;
-    overflow: hidden;
-    height: 100%;
-    color: var(--light-text);
-    z-index: 1;
-}
-
-/* Gradient Border Effect via Pseudo-element */
-.project-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    padding: 2px;
-    background: linear-gradient(135deg, var(--school-bus-yellow), transparent 40%, transparent 60%, var(--gold));
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0.5;
-    transition: opacity 0.4s ease;
-}
-
-.project-card:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    background: rgba(255, 255, 255, 0.06);
-}
-
-.project-card:hover::before {
-    opacity: 1;
-}
-
-.card-header {
-    margin-bottom: 1rem;
-}
-
-.project-title {
-    font-size: 2rem;
-    /* Adjusted size */
-    font-weight: 700;
-    color: var(--school-bus-yellow);
-    margin-bottom: 0.75rem;
-    display: inline-block;
-    position: relative;
-}
-
-/* Decorative underline for Project Title */
-.project-title::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--gold);
-    transition: width 0.3s ease;
-}
-
-.project-card:hover .project-title::after {
-    width: 100%;
-}
-
-.tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.tech-stack span {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    background-color: var(--gold);
-    color: var(--imperial-blue);
-    font-family: var(--font-code);
-    letter-spacing: -0.5px;
-}
-
-.project-description {
-    color: var(--light-text);
-    margin-bottom: 2rem;
-    font-size: 1rem;
-    line-height: 1.6;
-    flex-grow: 1;
-}
-
-.btn-github {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    padding: 0.8rem 1.5rem;
-    background-color: var(--dark-text);
-    /* GitHub Black */
-    color: var(--light-text);
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    align-self: flex-start;
-    border: 1px solid transparent;
-}
-
-.btn-github:hover {
-    background-color: var(--imperial-blue);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    color: var(--school-bus-yellow);
-}
-
-.btn-github svg {
-    transition: transform 0.3s ease;
-}
-
-.btn-github:hover svg {
-    transform: rotate(360deg);
+    transform: translateY(0);
 }
 
 /* Footer */
@@ -688,14 +477,11 @@ footer {
 
 /* Desktop Media Queries */
 @media (min-width: 768px) {
-
-    /* .hero h1 { font-size: 4rem; } Removed generic override as h1 is now specific in hero-title-anim */
     .hero-title-anim h1 {
         font-size: 4.5rem;
         height: 80px;
     }
 
-    /* Scaling up animated title */
     .hero-title-anim {
         height: 80px;
     }
@@ -704,7 +490,6 @@ footer {
         font-size: 2rem;
     }
 
-    /* Nav Desktop overrides */
     .menu-toggle {
         display: none;
     }
@@ -739,215 +524,7 @@ footer {
         width: 100%;
     }
 
-    /* Mobile toggle hidden stuff correction */
     .mobile-nav {
         display: none;
     }
-
-    /* Grids */
-    .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    .card-list {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    }
-}
-
-/* Animations */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Scroll Reveal Animation */
-.reveal {
-    opacity: 0;
-    transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* Split Timeline Layout */
-.timeline-container {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    position: relative;
-    width: 100%;
-    margin-top: 3rem;
-}
-
-@media (min-width: 900px) {
-    .timeline-container {
-        flex-direction: row;
-        gap: 4rem;
-    }
-}
-
-.timeline-column {
-    flex: 1;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.column-title {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    color: var(--school-bus-yellow);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-left: 1rem;
-    border-bottom: 1px solid rgba(253, 197, 0, 0.2);
-    padding-bottom: 1rem;
-}
-
-.timeline-list {
-    position: relative;
-    border-left: 2px solid rgba(255, 255, 255, 0.1);
-    margin-left: 1rem;
-    padding-left: 2.5rem;
-    padding-bottom: 1rem;
-    flex: 1;
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 3.5rem;
-}
-
-.timeline-item:last-child {
-    margin-bottom: 0;
-}
-
-/* Marker on the line */
-.timeline-marker {
-    position: absolute;
-    left: -2.5rem;
-    /* Matches padding-left of parent */
-    transform: translateX(-50%);
-    top: 0.5rem;
-    width: 18px;
-    height: 18px;
-    background: var(--school-bus-yellow);
-    border: 3px solid var(--imperial-blue);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(253, 197, 0, 0.2);
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-.timeline-item:hover .timeline-marker {
-    background: #fff;
-    box-shadow: 0 0 0 6px rgba(253, 197, 0, 0.4);
-    transform: translateX(-50%) scale(1.2);
-}
-
-/* Content Card */
-.timeline-content {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 1.5rem 2rem;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.timeline-content:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: var(--school-bus-yellow);
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-}
-
-/* Arrow/Pointer */
-.timeline-content::before {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 0.8rem;
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid rgba(255, 255, 255, 0.05);
-    /* Match bg */
-    transition: border-right-color 0.4s ease;
-}
-
-.timeline-content:hover::before {
-    border-right-color: var(--school-bus-yellow);
-}
-
-/* Date Badge */
-.timeline-date {
-    display: inline-block;
-    background: var(--imperial-blue);
-    color: var(--school-bus-yellow);
-    font-size: 0.85rem;
-    font-family: var(--font-code);
-    font-weight: 700;
-    padding: 0.4rem 1rem;
-    border-radius: 8px;
-    border: 1px solid rgba(253, 197, 0, 0.3);
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.timeline-content h3 {
-    font-size: 1.35rem;
-    margin-bottom: 0.5rem;
-    color: var(--school-bus-yellow);
-    font-weight: 600;
-}
-
-.timeline-content .org {
-    display: block;
-    color: var(--light-blue);
-    font-family: var(--font-code);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
-
-.timeline-content p {
-    font-size: 0.95rem;
-    color: var(--light-text);
-    line-height: 1.6;
-    opacity: 0.9;
-}
-
-/* Timeline Icons */
-.timeline-icon {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 3rem;
-    height: 3rem;
-    opacity: 0.1;
-    color: var(--light-text);
-    transition: all 0.4s ease;
-    pointer-events: none;
-    /* Prevent interference with text selection */
-}
-
-.timeline-content:hover .timeline-icon {
-    opacity: 0.4;
-    transform: rotate(-10deg) scale(1.1);
-    color: var(--school-bus-yellow);
 }

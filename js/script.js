@@ -51,5 +51,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
+    // Typewriter Effect
+    const ctaElement = document.querySelector('.hero-cta');
+    if (ctaElement) {
+        const text = ctaElement.textContent.trim();
+        ctaElement.textContent = ''; // Clear text
+
+        // Ensure cursor is visible/hidden correctly during typing if needed, 
+        // but CSS animation 'blinkingCursor' has a 3s delay which aligns with our typing delay.
+
+        setTimeout(() => {
+            let i = 0;
+            const speed = 2000 / text.length; // Calculate speed to fit exactly in 2 seconds
+            const typeWriter = () => {
+                if (i < text.length) {
+                    ctaElement.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            };
+            typeWriter();
+        }, 3000); // 3s delay before typing starts
+    }
+
     console.log('Portfolio script loaded successfully.');
 });
