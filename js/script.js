@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Force scroll to top on load
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
+
 
     const menuToggle = document.getElementById('menu-toggle');
     const mobileNav = document.getElementById('mobile-nav');

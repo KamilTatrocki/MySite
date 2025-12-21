@@ -8,7 +8,7 @@
     --light-text: #f0f2f5;
     --dark-text: #1a1a1a;
     --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --transition-speed: 0.3s;
+    --transition-speed: 0.5s;
     --font-main: 'Outfit', sans-serif;
     --font-code: 'Roboto Mono', monospace;
 }
@@ -88,7 +88,9 @@ section {
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
+    cursor: pointer;
     transition: all var(--transition-speed) ease;
+    text-align: center;
     text-align: center;
 }
 
@@ -99,8 +101,7 @@ section {
 
 .btn-primary:hover {
     background-color: var(--gold);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(253, 197, 0, 0.3);
+    box-shadow: 0 8px 15px rgba(253, 197, 0, 0.5);
 }
 
 .btn-outline {
@@ -411,12 +412,12 @@ nav {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: transform 0.2s;
+    transition: all var(--transition-speed) ease;
 }
 
 .tech-badge:hover {
-    transform: translateY(-3px);
     border-color: var(--school-bus-yellow);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Education & Experience & Certificates - Shared Timeline/Card Style */
@@ -438,11 +439,11 @@ nav {
     border-radius: 12px;
     box-shadow: var(--card-shadow);
     border-left: 5px solid var(--school-bus-yellow);
-    transition: transform 0.2s;
+    transition: all var(--transition-speed) ease;
 }
 
 .info-card:hover {
-    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .info-card h3 {
@@ -472,12 +473,11 @@ nav {
     box-shadow: var(--card-shadow);
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s;
+    transition: all var(--transition-speed) ease;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .project-preview {
