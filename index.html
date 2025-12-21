@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Kamil Tatrocki, a Full Stack Developer specializing in modern web technologies.">
+    <title>Kamil Tatrocki | Full Stack Developer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --imperial-blue: #00296bff;
+            --french-blue: #003f88ff;
+            --steel-azure: #00509dff;
+            --school-bus-yellow: #fdc500ff;
+            --gold: #ffd500ff;
+            --light-text: #f0f2f5;
+            --dark-text: #1a1a1a;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition-speed: 0.3s;
+            --font-main: 'Outfit', sans-serif;
+            --font-code: 'Roboto Mono', monospace;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: #f8f9fa;
+            color: var(--dark-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-speed);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--imperial-blue);
+        }
+
+        section {
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--imperial-blue);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--school-bus-yellow);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--school-bus-yellow);
+            color: var(--imperial-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(253, 197, 0, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--school-bus-yellow);
+            color: var(--school-bus-yellow);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--school-bus-yellow);
+            color: var(--imperial-blue);
+        }
+
+        /* Header / Nav */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--imperial-blue);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--school-bus-yellow);
+        }
+
+        .nav-links {
+            display: none; /* Mobile first hidden */
+        }
+
+        /* Mobile Menu Toggle (Simple Checkbox Hack for CSS-only toggle) */
+        .menu-toggle {
+            display: block;
+            cursor: pointer;
+            color: var(--light-text);
+            font-size: 1.8rem;
+        }
+
+        #mobile-menu-check {
+            display: none;
+        }
+
+        /* Mobile Nav Styling */
+        .mobile-nav {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--french-blue);
+            flex-direction: column;
+            align-items: center;
+            max-height: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 1rem;
+            color: var(--light-text);
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        #mobile-menu-check:checked ~ .mobile-nav {
+            max-height: 400px; /* Expand on check */
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--imperial-blue);
+            color: var(--light-text);
+            padding: 6rem 1.5rem 4rem;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Subtle pattern or gradient overlay if desired */
+            background-image: linear-gradient(135deg, var(--imperial-blue) 0%, var(--french-blue) 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--school-bus-yellow);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            font-family: var(--font-code);
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Known Technologies */
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .tech-badge {
+            background-color: white;
+            color: var(--imperial-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            box-shadow: var(--card-shadow);
+            font-weight: 500;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-3px);
+            border-color: var(--school-bus-yellow);
+        }
+
+        /* Education & Experience & Certificates - Shared Timeline/Card Style */
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Simple Card list for mobile, grid for larger */
+        .card-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--school-bus-yellow);
+            transition: transform 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: var(--imperial-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .info-card .meta {
+            font-family: var(--font-code);
+            color: var(--steel-azure);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .project-preview {
+            background-color: #ddd;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 3rem;
+            /* Placeholder styling */
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--imperial-blue);
+            color: var(--light-text);
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icon {
+            color: var(--school-bus-yellow);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icon:hover {
+            color: white;
+        }
+
+        /* Desktop Media Queries */
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 4rem; }
+            .hero h2 { font-size: 2rem; }
+            
+            /* Nav Desktop overrides */
+            .menu-toggle, #mobile-menu-check { display: none; }
+            .nav-links {
+                display: flex;
+                gap: 2rem;
+            }
+            .nav-links a {
+                color: var(--light-text);
+                font-weight: 500;
+                position: relative;
+            }
+            .nav-links a:hover {
+                color: var(--school-bus-yellow);
+            }
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--school-bus-yellow);
+                transition: width 0.3s;
+            }
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+            
+            /* Mobile toggle hidden stuff correction */
+            .mobile-nav { display: none; }
+
+            /* Grids */
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            .card-list {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container nav-box">
+            <nav>
+                <div class="logo">KT.</div>
+                
+                <!-- Desktop Nav -->
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#education">Education</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <label for="mobile-menu-check" class="menu-toggle" aria-label="Toggle navigation">
+                    &#9776; <!-- Hamburger Icon -->
+                </label>
+            </nav>
+            
+            <!-- Mobile Nav Container (controlled by checkbox) -->
+            <input type="checkbox" id="mobile-menu-check">
+            <div class="mobile-nav">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="about" class="hero">
+            <h1>Kamil Tatrocki</h1>
+            <h2>Full Stack Developer</h2>
+            <p>
+                Passionate about building scalable, user-friendly web applications. 
+                Focusing on modern frontend architectures and robust backend systems.
+                Turning complex problems into elegant solutions.
+            </p>
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+        </section>
+
+        <!-- Technologies -->
+        <section id="skills">
+            <h2 class="section-title">Known Technologies</h2>
+            <div class="tech-grid">
+                <!-- Frontend -->
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
+                <span class="tech-badge">JavaScript (ES6+)</span>
+                <span class="tech-badge">React</span>
+                <span class="tech-badge">Vue.js</span>
+                <span class="tech-badge">Tailwind CSS</span>
+                <!-- Backend -->
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">Express</span>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Django</span>
+                <!-- Tools -->
+                <span class="tech-badge">Git</span>
+                <span class="tech-badge">Docker</span>
+                <span class="tech-badge">AWS</span>
+                <span class="tech-badge">MongoDB</span>
+                <span class="tech-badge">PostgreSQL</span>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="card-list">
+                <article class="info-card">
+                    <h3>Master of Computer Science</h3>
+                    <span class="meta">University of Technology | 2020 - 2022</span>
+                    <p>Specialized in Software Engineering and Artificial Intelligence. Graduated with Honors.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Bachelor of Science in Informatics</h3>
+                    <span class="meta">State Polytechnic | 2016 - 2020</span>
+                    <p>Core curriculum focusing on algorithms, data structures, and web development fundamentals.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="card-list">
+                <article class="info-card">
+                    <h3>Senior Frontend Developer</h3>
+                    <span class="meta">TechCorp Solutions | 2023 - Present</span>
+                    <p>Leading the frontend team in migrating legacy monolithic apps to micro-frontends using React. Improved site performance by 40%.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Full Stack Developer</h3>
+                    <span class="meta">Creative Agency X | 2021 - 2023</span>
+                    <p>Developed custom e-commerce solutions for diverse clients using Node.js and Vue.js. Integrated payment gateways and headless CMS.</p>
+                </article>
+                <article class="info-card">
+                    <h3>Junior Web Developer</h3>
+                    <span class="meta">StartUp Inc. | 2020 - 2021</span>
+                    <p>Collaborated on the development of the MVP for a fintech application. Assisted in API design and database management.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                
+                <!-- Project 1 -->
+                <article class="project-card">
+                    <div class="project-preview" role="img" aria-label="E-Commerce Dashboard Preview">
+                        🛍️
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Dashboard</h3>
+                        <p>A comprehensive tracking dashboard for shop owners to visualize sales data, manage inventory, and track orders in real-time.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary btn-sm">Live Demo</a>
+                            <a href="#" class="btn btn-outline btn-sm">View Code</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card">
+                    <div class="project-preview" role="img" aria-label="Task Manager App Preview">
+                        ✅
+                    </div>
+                    <div class="project-content">
+                        <h3>Task Master App</h3>
+                        <p>A collaborative task management tool featuring drag-and-drop kanban boards, real-time updates via WebSockets, and team workspaces.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary btn-sm">Live Demo</a>
+                            <a href="#" class="btn btn-outline btn-sm">View Code</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card">
+                    <div class="project-preview" role="img" aria-label="Weather AI Preview">
+                        🌦️
+                    </div>
+                    <div class="project-content">
+                        <h3>Weather AI Forecast</h3>
+                        <p>Hyper-local weather forecasting app using machine learning models to predict micro-climate changes. Built with Python and React.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn btn-primary btn-sm">Live Demo</a>
+                            <a href="#" class="btn btn-outline btn-sm">View Code</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Certificates -->
+        <section id="certificates">
+            <h2 class="section-title">Certificates</h2>
+            <div class="card-list" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <article class="info-card" style="text-align: center;">
+                    <h3>AWS Certified Solutions Architect</h3>
+                    <span class="meta">Amazon Web Services | 2023</span>
+                </article>
+                <article class="info-card" style="text-align: center;">
+                    <h3>Meta Front-End Developer</h3>
+                    <span class="meta">Coursera | 2022</span>
+                </article>
+                <article class="info-card" style="text-align: center;">
+                    <h3>Professional Scrum Master I</h3>
+                    <span class="meta">Scrum.org | 2021</span>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <h2 style="color: var(--school-bus-yellow); margin-bottom: 2rem;">Let's Connect</h2>
+            <div class="social-links">
+                <a href="#" class="social-icon" aria-label="GitHub">GitHub</a>
+                <a href="#" class="social-icon" aria-label="LinkedIn">LinkedIn</a>
+                <a href="#" class="social-icon" aria-label="Twitter">Twitter</a>
+                <a href="mailto:kamil@example.com" class="social-icon" aria-label="Email">Email</a>
+            </div>
+            <p>&copy; 2025 Kamil Tatrocki. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
