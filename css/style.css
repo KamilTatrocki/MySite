@@ -470,7 +470,6 @@ nav {
 }
 
 .info-card:hover {
-    transform: translateY(-5px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     background: rgba(255, 255, 255, 0.06);
 }
@@ -565,7 +564,6 @@ nav {
 }
 
 .project-card:hover {
-    transform: translateY(-5px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     background: rgba(255, 255, 255, 0.06);
 }
@@ -828,7 +826,7 @@ footer {
 }
 
 .v-content:hover {
-    transform: translateY(-5px);
+
     background: rgba(255, 255, 255, 0.06);
     border-color: var(--school-bus-yellow);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -909,76 +907,50 @@ footer {
 }
 
 /* Orientation Styles */
-.v-item.left {
-    flex-direction: row;
-}
-
-.v-item.left .v-content {
-    order: 1;
-    text-align: right;
-}
-
-.v-item.left .v-marker {
-    order: 2;
-}
-
-.v-item.left .v-date-wrapper {
-    order: 3;
-    justify-content: flex-start;
-    padding-left: 2rem;
-}
-
+/* Unified Orientation Styles (Date Left, Content Right) */
+.v-item.left,
 .v-item.right {
     flex-direction: row;
 }
 
+.v-item.left .v-date-wrapper,
 .v-item.right .v-date-wrapper {
     order: 1;
     justify-content: flex-end;
     padding-right: 2rem;
+    padding-left: 0;
 }
 
+.v-item.left .v-marker,
 .v-item.right .v-marker {
     order: 2;
 }
 
+.v-item.left .v-content,
 .v-item.right .v-content {
     order: 3;
     text-align: left;
 }
 
-/* Arrows */
+/* Arrows - Always on the left side of content */
 .v-item .v-content::after {
     content: '';
     position: absolute;
     top: 50%;
+    left: -10px;
+    /* Always on left */
+    right: auto;
     width: 0;
     height: 0;
     border-style: solid;
     margin-top: -10px;
-    transition: all 0.4s ease;
-}
-
-.v-item.left .v-content::after {
-    right: -10px;
-    border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent rgba(255, 255, 255, 0.1);
-}
-
-.v-item.right .v-content::after {
-    left: -10px;
     border-width: 10px 10px 10px 0;
     border-color: transparent rgba(255, 255, 255, 0.1) transparent transparent;
+    transition: all 0.4s ease;
 }
 
 .v-item:hover .v-content::after {
     border-color: transparent var(--school-bus-yellow) transparent transparent;
-    /* Right items */
-}
-
-.v-item.left:hover .v-content::after {
-    border-color: transparent transparent transparent var(--school-bus-yellow);
-    /* Left items */
 }
 
 /* Responsive */
