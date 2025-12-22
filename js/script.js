@@ -74,5 +74,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000); // 3s delay before typing starts
     }
 
+    // Image Slider Logic
+    const sliderTrack = document.getElementById('slider-track');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const dots = document.querySelectorAll('.slider-dot');
+
+    if (sliderTrack && slides.length > 0) {
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        const updateSlider = () => {
+            // Reset dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            // Activate current dot
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+
+            // Move track
+            sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        };
+
+        const nextSlide = () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        };
+
+        const prevSlide = () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        };
+
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+    }
+
     console.log('Portfolio script loaded successfully.');
 });
