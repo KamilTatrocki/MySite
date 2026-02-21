@@ -239,7 +239,7 @@ nav {
     height: 0px;
     border-radius: 50%;
     background: var(--school-bus-yellow);
-    animation: popIn 0.5s cubic-bezier(.74, .06, .4, .92) forwards;
+    animation: popIn 1.5s cubic-bezier(.74, .06, .4, .92) forwards;
     animation-delay: 1s;
     margin-left: 5px;
     margin-top: -10px;
