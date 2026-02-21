@@ -217,7 +217,7 @@ nav {
     height: inherit;
     background: var(--school-bus-yellow);
     position: absolute;
-    animation: mainBlock 2s cubic-bezier(.74, .06, .4, .92) forwards;
+    animation: mainBlock 1s cubic-bezier(.74, .06, .4, .92) forwards;
     display: flex;
 }
 
@@ -225,8 +225,8 @@ nav {
     font-family: var(--font-main);
     color: var(--light-text);
     font-size: 3rem;
-    animation: mainFadeIn 2s forwards;
-    animation-delay: 1.6s;
+    animation: mainFadeIn 1s forwards;
+    animation-delay: 0.8s;
     opacity: 0;
     display: flex;
     align-items: baseline;
@@ -239,8 +239,8 @@ nav {
     height: 0px;
     border-radius: 50%;
     background: var(--school-bus-yellow);
-    animation: popIn 0.8s cubic-bezier(.74, .06, .4, .92) forwards;
-    animation-delay: 2s;
+    animation: popIn 0.5s cubic-bezier(.74, .06, .4, .92) forwards;
+    animation-delay: 1s;
     margin-left: 5px;
     margin-top: -10px;
     position: absolute;
@@ -262,14 +262,14 @@ nav {
     height: inherit;
     background: var(--gold);
     position: absolute;
-    animation: secBlock 2s cubic-bezier(.74, .06, .4, .92) forwards;
-    animation-delay: 2s;
+    animation: secBlock 1s cubic-bezier(.74, .06, .4, .92) forwards;
+    animation-delay: 1s;
     display: flex;
 }
 
 .hero-role-anim p {
-    animation: secFadeIn 2s forwards;
-    animation-delay: 3.2s;
+    animation: secFadeIn 1s forwards;
+    animation-delay: 1.6s;
     opacity: 0;
     font-weight: 400;
     font-family: var(--font-code);
@@ -309,7 +309,7 @@ nav {
     /* Center text if lines don't fill width */
 
     animation:
-        secFadeIn 2s forwards;
+        secFadeIn 1s forwards;
 }
 
 .hero-cta::after {
